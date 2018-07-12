@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
 
   # Admin Dashboard
-  ActiveAdmin.routes(self)
+  ActiveAdmin.routes(self) rescue ActiveAdmin::DatabaseHitDuringLoad
 
 
   root 'home#index'
