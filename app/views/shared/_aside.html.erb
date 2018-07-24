@@ -42,11 +42,8 @@
   </section>
 
   <section class="twitter">
-    <% if false %>
-      <%-# When the Tardis firewall issue is fixed, uncomment this block -%>
-      <h2>Twitter feed.</h2>
-      <%= render partial: 'shared/tweet', collection: tweets, as: :tweet %>
-    <% end %>
+    <h2>Twitter feed.</h2>
+    <%= render partial: 'shared/tweet', collection: tweets, as: :tweet %>
   </section>
 
   <section class="message-studio">

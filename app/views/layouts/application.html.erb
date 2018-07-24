@@ -19,8 +19,7 @@
 
 <body>
   <input type="checkbox" id="top-toggler" value="">
-  <%-# When the Tardis firewall issue is resolved, add tweets: @tweets to locals -%>
-  <%= render partial: "shared/aside", locals: {events: @upcoming_events} %>
+  <%= render partial: "shared/aside", locals: {events: @upcoming_events, tweets: @tweets} %>
   <div id="main-body">
     <header>
       <div class="welcome">
