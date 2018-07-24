@@ -2,7 +2,7 @@
 lock "3.9.0"
 
 set :application, "FreshAir.org.uk"
-set :repo_url, "https://#{ENV['REPO_CREDENTIALS']}@bitbucket.org/freshair/refresh-website.git"
+set :repo_url, "https://gitlab.com/freshairradio/refresh-website.git"
 set :deploy_to, "/var/www/refresh"
 
 # Folders and files shared among releases (don't need to be in repo)
