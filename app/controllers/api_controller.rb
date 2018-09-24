@@ -1,5 +1,26 @@
 class ApiController < ActionController::Base
 
+  def get_messages
+    redis = Redis.new
+    # Messages will be an array of JSON strings. To parse these on the client side call
+    # JSON.parse(...) on each element.
+    # A one-liner might be (if `messages` is the returned value from the API call)
+    # `messages = messages.map(JSON.parse)`
+    # Caution: this returns the raw data submitted by the client, with no html escaping.
+    #          If this will be included in HTML, make sure to escape it.
+    messages = redis.lrange "messages", 0, 8    
+    render json: messages
+  end
+
+  def submit_message
+    redis = Redis.new
+    redis.lpush "messages", {author: params[:author],
+                             content: params[:content],
+                             time: params[:time],
+                             date: params[:date]}.to_json
+    render json: {message: "Success"}
+  end
+
   def set_broadcast_info
     # IP's allowed to make changes, localhost and the current studio windows PC
     # TODO: add new PC IP to the list (when it's set up)
