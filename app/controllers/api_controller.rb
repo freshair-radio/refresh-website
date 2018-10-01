@@ -1,5 +1,36 @@
 class ApiController < ActionController::Base
 
+  def set_broadcast_info
+    # IP's allowed to make changes, localhost and the current studio windows PC
+    # TODO: add new PC IP to the list (when it's set up)
+    allowed = ["127.0.0.1", "129.215.245.82"]
+    if allowed.include? request.remote_ip
+      redis = Redis.new
+      redis.set "broadcast_info_title", params[:title]
+      redis.set "broadcast_info_status",params[:status]
+      redis.set "broadcast_info_pic", params[:pic]
+      redis.set "broadcast_info_slug", params[:slug]
+      redis.set "broadcast_info_link", params[:link]
+      render json: {message: "Success"}
+    else
+      render json: {message: "Unauthorised"}
+    end
+  end
+
+  def get_broadcast_info
+    redis = Redis.new
+    title = redis.get "broadcast_info_title"
+    status = redis.get "broadcast_info_status"
+    pic = redis.get "broadcast_info_pic"
+    slug = redis.get "broadcast_info_slug"
+    link = redis.get "broadcast_info_link"
+    title ||= "The best music from FreshAir.org.uk"
+    status ||= "FreshSounds"
+    # Don't give pic a default value, because the frontend can handle that (with a default src)
+    # Slug and link are optional, so also don't need a default value
+    render json: {title: title, status: status, pic: pic, slug: slug, link: link}
+  end
+
   def shows_for_user
     @user = User.valid.find_by_email(params[:email])
     if @user.nil?
