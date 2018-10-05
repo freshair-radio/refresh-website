@@ -38,6 +38,13 @@ class ApiController < ActionController::Base
     end
   end
 
+  def record_user
+    # Store the email used, and timestamp
+    redis = Redis.new
+    redis.lpush "login_records" {email: params[:email],
+                                  timestamp: Time.now.to_i}
+  end
+  
   def get_broadcast_info
     redis = Redis.new
     title = redis.get "broadcast_info_title"
