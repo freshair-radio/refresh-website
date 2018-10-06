@@ -79,6 +79,8 @@ Rails.application.routes.draw do
 
 
   scope 'api' do
+    get 'messages', to: 'api#get_messages'
+    post 'messages/submit', to: 'api#submit_message'
     get 'broadcast_info', to: 'api#get_broadcast_info'
     post 'broadcast_info', to: 'api#set_broadcast_info'
     get 'users/:email/shows', to: 'api#shows_for_user', :constraints => { email: /[\w|.|-]+@[\w|.|-]+/ }
