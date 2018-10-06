@@ -80,6 +80,7 @@ Rails.application.routes.draw do
 
   scope 'api' do
     get 'messages', to: 'api#get_messages'
+    post 'records', to: 'api#record_user'
     post 'messages/submit', to: 'api#submit_message'
     get 'broadcast_info', to: 'api#get_broadcast_info'
     post 'broadcast_info', to: 'api#set_broadcast_info'
