@@ -254,6 +254,7 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     redcarpet (3.4.0)
+    redis (4.0.2)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -360,6 +361,7 @@ DEPENDENCIES
   rails (~> 5.0.1)
   rails_autolink
   redcarpet
+  redis
   rolify
   sass-rails (~> 5.0)
   spring
@@ -373,4 +375,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.16.2
+   1.16.5

@@ -1,5 +1,64 @@
 class ApiController < ActionController::Base
 
+  def get_messages
+    redis = Redis.new
+    # Messages will be an array of JSON strings. To parse these on the client side call
+    # JSON.parse(...) on each element.
+    # A one-liner might be (if `messages` is the returned value from the API call)
+    # `messages = messages.map(JSON.parse)`
+    # Caution: this returns the raw data submitted by the client, with no html escaping.
+    #          If this will be included in HTML, make sure to escape it.
+    messages = redis.lrange "messages", 0, 8    
+    render json: messages
+  end
+
+  def submit_message
+    redis = Redis.new
+    redis.lpush "messages", {author: params[:author],
+                             content: params[:content],
+                             time: params[:time],
+                             date: params[:date]}.to_json
+    render json: {message: "Success"}
+  end
+
+  def set_broadcast_info
+    # IP's allowed to make changes, localhost and the current studio windows PC
+    # TODO: add new PC IP to the list (when it's set up)
+    allowed = ["127.0.0.1", "129.215.245.82"]
+    if allowed.include? request.remote_ip
+      redis = Redis.new
+      redis.set "broadcast_info_title", params[:title]
+      redis.set "broadcast_info_status",params[:status]
+      redis.set "broadcast_info_pic", params[:pic]
+      redis.set "broadcast_info_slug", params[:slug]
+      redis.set "broadcast_info_link", params[:link]
+      render json: {message: "Success"}
+    else
+      render json: {message: "Unauthorised"}
+    end
+  end
+
+  def record_user
+    # Store the email used, and timestamp
+    redis = Redis.new
+    redis.lpush "login_records", {email: params[:email],
+                                  timestamp: Time.now.to_i}
+  end
+  
+  def get_broadcast_info
+    redis = Redis.new
+    title = redis.get "broadcast_info_title"
+    status = redis.get "broadcast_info_status"
+    pic = redis.get "broadcast_info_pic"
+    slug = redis.get "broadcast_info_slug"
+    link = redis.get "broadcast_info_link"
+    title ||= "The best music from FreshAir.org.uk"
+    status ||= "FreshSounds"
+    # Don't give pic a default value, because the frontend can handle that (with a default src)
+    # Slug and link are optional, so also don't need a default value
+    render json: {title: title, status: status, pic: pic, slug: slug, link: link}
+  end
+
   def shows_for_user
     @user = User.valid.find_by_email(params[:email])
     if @user.nil?

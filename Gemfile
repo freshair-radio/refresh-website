@@ -67,8 +67,9 @@ gem 'redcarpet'
 # Emails exception alerts to the webmaster
 gem 'exception_notification'
 
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
+# Use Redis adapter for storing broadcast info
+# Note: redis-server package must be installed via `apt install redis-server`
+gem 'redis'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
