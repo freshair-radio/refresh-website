@@ -24,7 +24,7 @@ module Website
 
     # Allow for CORS
     config.action_dispatch.default_headers = {
-      'Access-Control-Allow-Origin' => 'https://studio.freshair.org.uk',
+      'Access-Control-Allow-Origin' => '*',
       'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
     }
 
