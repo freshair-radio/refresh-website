@@ -22,7 +22,7 @@ fetchBroadcastInfo = ->
       detailsElement.style.display = 'inline'
       spaceElement.style.display = 'inline'
 
-    if info.pic != null
+    if info.pic != null && info.pic != ""
       defaultPictureElement.style.display = 'none'
       pictureElement.src = info.pic
       pictureElement.style.display = 'block'
