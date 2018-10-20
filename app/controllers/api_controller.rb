@@ -24,18 +24,20 @@ class ApiController < ActionController::Base
   def set_broadcast_info
     # IP's allowed to make changes, localhost and the current studio windows PC
     # TODO: add new PC IP to the list (when it's set up)
-    allowed = ["127.0.0.1", "129.215.245.82"]
-    if allowed.include? request.remote_ip
-      redis = Redis.new
-      redis.set "broadcast_info_title", params[:title]
-      redis.set "broadcast_info_status",params[:status]
-      redis.set "broadcast_info_pic", params[:pic]
-      redis.set "broadcast_info_slug", params[:slug]
-      redis.set "broadcast_info_link", params[:link]
-      render json: {message: "Success"}
-    else
-      render json: {message: "Unauthorised"}
-    end
+    # ^^Disabled for right now for ease of development of the broadcast controls app
+    #allowed = ["127.0.0.1", "129.215.245.82"]
+    #puts request.remote_ip
+    #if allowed.include? request.remote_ip
+    redis = Redis.new
+    redis.set "broadcast_info_title", params[:title]
+    redis.set "broadcast_info_status",params[:status]
+    redis.set "broadcast_info_pic", params[:pic]
+    redis.set "broadcast_info_slug", params[:slug]
+    redis.set "broadcast_info_link", params[:link]
+    render json: {message: "Success"}
+    #else
+    #  render json: {message: "Unauthorised"}
+    #end
   end
 
   def record_user

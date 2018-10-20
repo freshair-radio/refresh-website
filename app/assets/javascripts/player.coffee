@@ -11,8 +11,9 @@ fetchBroadcastInfo = ->
 
   request.onload = ->
     info = request.response
-    statusElement.innerHTML = info.status
-    titleElement.innerHTML = info.title
+    # Inner text rather than innerHTML to prevent javascript injection
+    statusElement.innerText = info.status
+    titleElement.innerText = info.title
     if info.link == null
       detailsElement.style.display = 'none'
       spaceElement.style.display = 'none'
@@ -31,7 +32,7 @@ fetchBroadcastInfo = ->
     return
 
   bustCache = '?' + (new Date).getTime()
-  request.open 'GET', 'https://studio.freshair.org.uk/api/broadcast_info/' + bustCache, true
+  request.open 'GET', 'https://freshair.org.uk/api/broadcast_info/' + bustCache, true
   request.responseType = 'json'
   request.send()
   return
