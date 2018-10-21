@@ -43,7 +43,7 @@ initializePlayer = ->
   fetchBroadcastInfo()
 
   # https://github.com/turbolinks/turbolinks/issues/157
-  radio = new Audio('https://studio.freshair.org.uk:8443/radio')
+  radio = new Audio('https://radio.freshair.org.uk/radio')
 
   player = document.getElementById('player')
   autoplay = player.hasAttribute('data-autoplay')
