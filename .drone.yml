@@ -4,6 +4,9 @@ name: default
 steps:
 - name: docker  
   image: plugins/docker
+  environment:
+    SECRET_KEY_BASE:
+      from_secret: SECRET_KEY_BASE
   settings:
     repo: freshairweb/refresh-website
     username:
