@@ -14,4 +14,4 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
 # Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["ACTIVE_ADMIN_PATH=/admin", "RAILS_SERVE_STATIC_FILES=true", "RAILS_ENV=production","rails", "server", "-b", "0.0.0.0"]
