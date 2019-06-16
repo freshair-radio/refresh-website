@@ -28,4 +28,5 @@ production:
   pool: 5
   username: <%= ENV["DB_USER"] %>
   password: <%= ENV["DB_PASSWORD"] %>
-  socket: /var/run/mysqld/mysqld.sock
+  host: db
+  port: 3306
