@@ -16,5 +16,7 @@ EXPOSE 3000
 ENV ACTIVE_ADMIN_PATH /admin
 ENV RAILS_SERVE_STATIC_FILES true
 ENV RAILS_ENV production
+RUN bin/rake assets:precompile
+
 # Start the main process.
 CMD ["rails", "server", "-b", "0.0.0.0"]
