@@ -13,5 +13,8 @@ RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
+ENV ACTIVE_ADMIN_PATH /admin
+ENV RAILS_SERVE_STATIC_FILES true
+ENV RAILS_ENV production
 # Start the main process.
-CMD ["ACTIVE_ADMIN_PATH=/admin", "RAILS_SERVE_STATIC_FILES=true", "RAILS_ENV=production","rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-b", "0.0.0.0"]
