@@ -16,6 +16,7 @@ EXPOSE 3000
 ENV ACTIVE_ADMIN_PATH /admin
 ENV RAILS_SERVE_STATIC_FILES true
 ENV RAILS_ENV production
+ENV SECRET_KEY_BASE
 RUN bin/rake assets:precompile
 
 # Start the main process.
