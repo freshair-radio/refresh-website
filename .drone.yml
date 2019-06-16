@@ -13,6 +13,8 @@ steps:
       from_secret: DOCKER_USERNAME
     password:
       from_secret: DOCKER_PASSWORD
+    build_args_from_env:
+      - SECRET_KEY_BASE
 - name: ssh
   image: appleboy/drone-ssh
   settings:
