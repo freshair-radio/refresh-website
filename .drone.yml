@@ -10,3 +10,14 @@ steps:
       from_secret: DOCKER_USERNAME
     password:
       from_secret: DOCKER_PASSWORD
+- name: ssh
+  image: appleboy/drone-ssh
+  settings:
+    host: 167.71.136.194
+    username: root
+    ssh_key:
+      from_secret: SSH_KEY
+    port: 22
+    script:
+      - cd /home/refresh-website
+      - ./run
