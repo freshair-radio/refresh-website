@@ -1,0 +1,17 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7.17
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+    volumes:
+      - .:/myapp
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && ACTIVE_ADMIN_PATH=/admin RAILS_SERVE_STATIC_FILES=true RAILS_ENV=production rails server -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+      - "6777:587"
+    
