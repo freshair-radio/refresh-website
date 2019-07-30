@@ -1,9 +1,10 @@
 <nav class="main-nav">
+
   <ul>
     <li class="selected"><%= link_to 'Home', root_path%></li>
-    <% @global_teams.each do |team| %>
+    <% @global_tags.each do |tag| %>
       <li>
-        <%= link_to team.name, team%>
+        <%= link_to tag.name, tag%>
       </li>
     <% end %>
     <% @global_pages.each do |page| %>

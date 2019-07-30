@@ -14,5 +14,6 @@ class ApplicationController < ActionController::Base
     @tweets = TwitterService.get_timeline
     @global_pages = Page.all.order(priority: :desc)
     @global_teams = Team.order(:display_order)
+    @global_tags = Tag.post_types
   end
 end
