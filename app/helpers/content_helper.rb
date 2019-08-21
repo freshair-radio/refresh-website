@@ -49,7 +49,7 @@ module ContentHelper
   end
 
   def accepted_attributes
-    %w(href src width height alt cite datetime title class name xml:lang abbr style border cellpadding cellspacing target)
+    %w(href src width height alt cite datetime title class name xml:lang abbr style border cellpadding cellspacing target controls)
   end
 
 end
